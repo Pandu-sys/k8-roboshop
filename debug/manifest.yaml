@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: roboshop
+  labels:
+    project: roboshop
+    environment: dev
+    purpose: debug
+spec:
+  containers:
+  - name: debug # container
+    image: pandu15/debug:v2 #by default it'll get gtom docker hub
+    
