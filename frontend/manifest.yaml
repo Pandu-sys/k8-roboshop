@@ -72,7 +72,6 @@ kind: Deployment
 metadata:
   name: frontend
   namespace: roboshop
-  # these are the labels related to deployment resource
   labels:
     project: roboshop
     tier: frontend
@@ -94,26 +93,28 @@ spec:
       containers:
       - name: frontend
         image: pandu15/frontend:v2
+        ports:
+        - containerPort: 80
         volumeMounts:
         - name: nginx-config
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf
           readOnly: true
-    # this is the pod level, its like the disk to the pod
-        volumes:
-        - name: nginx-config   
-          configMap:
-            name: nginx
-            items:
-            - key: nginx.conf
-              path: nginx.conf
+
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+          items:
+          - key: nginx.conf
+            path: nginx.conf
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend
   namespace: roboshop
-  # servicer labels
   labels:
     project: roboshop
     tier: frontend
@@ -125,6 +126,6 @@ spec:
     tier: frontend
     component: frontend
   ports:
-   - protocol: TCP
-     port: 80 # service port
-     targetPort: 80 # container port
+  - protocol: TCP
+    port: 80
+    targetPort: 80
