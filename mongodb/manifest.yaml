@@ -14,7 +14,7 @@ spec:
     matchLabels:
       project: roboshop
       tier: db
-      component: frontend
+      component: mongodb
   template:
     metadata:
       labels:
