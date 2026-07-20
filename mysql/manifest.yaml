@@ -5,7 +5,7 @@ metadata:
    namespace: roboshop
 type: Opaque
 data: 
-  MYSQL_ROOT_PASSWORD: Um9ib3Nob3BAMQo=
+  MYSQL_ALLOW_EMPY_PASSWORD: true
 ---
 apiVersion: apps/v1
 kind: Deployment
