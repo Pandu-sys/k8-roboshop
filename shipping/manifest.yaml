@@ -31,32 +31,35 @@ spec:
         tier: backend
         component: shipping
     spec:
+  template:
+    spec:
       containers:
       - name: shipping
         image: pandu15/shipping:v2
-      ports:
-      - name: liveness-port
-        containerPort: 8080
-      startupProbe:
-        httpGet:
-          path: /health
-          port: liveness-port
-        # we are giving 5 mins to start the application
-        failureThreshold: 12
-        periodSeconds: 10
-      readinessProbe:
-        httpGet:
-          path: /health
-          port: liveness-port
-        # we are giving 5 mins to start the application
-        periodSeconds: 10
-      livenessProbe:
-        httpGet:
-          path: /health
-          port: liveness-port
-        # we are giving 5 mins to start the application
-        periodSeconds: 10
-      envFrom:
+        ports:
+        - name: liveness-port
+          containerPort: 8080
+
+        startupProbe:
+          httpGet:
+            path: /health
+            port: liveness-port
+          failureThreshold: 12
+          periodSeconds: 10
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: liveness-port
+          periodSeconds: 10
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: liveness-port
+          periodSeconds: 10
+
+        envFrom:
         - configMapRef:
             name: shipping
 ---
