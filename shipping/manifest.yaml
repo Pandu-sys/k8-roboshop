@@ -32,7 +32,7 @@ spec:
         component: shipping
     spec:
       containers:
-      - name: mongodb
+      - name: shipping
         image: pandu15/shipping:v2
       ports:
       - name: liveness-port
@@ -50,7 +50,7 @@ spec:
           port: liveness-port
         # we are giving 5 mins to start the application
         periodSeconds: 10
-      livelinessProbe:
+      livenessProbe:
         httpGet:
           path: /health
           port: liveness-port
