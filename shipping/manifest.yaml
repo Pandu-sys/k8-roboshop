@@ -34,7 +34,29 @@ spec:
       containers:
       - name: mongodb
         image: pandu15/shipping:v2
-        envFrom:
+      ports:
+      - name: liveness-port
+        containerPort: 8080
+      startupProbe:
+        httpGet:
+          path: /health
+          port: liveness-port
+        # we are giving 5 mins to start the application
+        failureThreshold: 12
+        periodSeconds: 10
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: liveness-port
+        # we are giving 5 mins to start the application
+        periodSeconds: 10
+      livelinessProbe:
+        httpGet:
+          path: /health
+          port: liveness-port
+        # we are giving 5 mins to start the application
+        periodSeconds: 10
+      envFrom:
         - configMapRef:
             name: shipping
 ---
