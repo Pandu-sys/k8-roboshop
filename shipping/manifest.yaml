@@ -71,7 +71,8 @@ metadata:
   # servicer labels
   labels:
     project: roboshop
-    environment: dev
+    tier: backend
+    component: shipping
 spec:
 # service uses the below labels to select the pods
   selector:
